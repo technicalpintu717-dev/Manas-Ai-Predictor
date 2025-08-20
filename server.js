@@ -1,27 +1,23 @@
-const express = require("express");
 const path = require("path");
+const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-// Public folder serve karo
-app.use(express.static(path.join(__dirname, "public")));
-
-// Admin folder serve karo (optional)
-app.use("/admin", express.static(path.join(__dirname, "admin")));
-
-// API routes (example)
+// Middleware
 app.use(express.json());
 
+// ✅ Public folder serve करो
+app.use(express.static(path.join(__dirname, "public")));
+
+// Routes
 app.post("/api/generate", (req, res) => {
-  // yaha apna key generate logic hoga
-  res.json({ key: "demo-key", expiresAt: Date.now() + 1000*60*60*24 });
+  // ... आपका logic
 });
 
-// Agar kuch nahi mile toh index.html return karo
-app.get("/", (req, res) => {
+// ✅ अगर कोई route match नहीं होता तो index.html serve हो
+app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// Start server
+const PORT = process.env.PORT || 10000;
+app.listen(PORT, () => console.log(`Server running on ${PORT}`));
