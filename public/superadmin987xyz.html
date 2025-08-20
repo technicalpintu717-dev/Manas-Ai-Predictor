@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Admin Panel - MANAS AI</title>
+<style>
+body,html{margin:0;padding:0;font-family:Arial,sans-serif;background:#0b0f17;color:#e6eef6;}
+.wrap{max-width:600px;margin:50px auto;padding:20px;background:#111827;border-radius:10px;}
+input,button{width:100%;padding:10px;margin:6px 0;border-radius:6px;border:none;}
+button.primary{background:linear-gradient(90deg,#00f0ff,#a64dff);color:#04121a;font-weight:bold;cursor:pointer;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h2>Generate Access Key</h2>
+  <input type="password" id="masterPass" placeholder="Enter Master Password">
+  <input type="number" id="days" placeholder="Validity Days">
+  <button id="btnGen" class="primary">Generate Key</button>
+  <div id="output" style="margin-top:10px;color:#9aefff;"></div>
+</div>
+<script src="js/admin.js"></script>
+</body>
+</html>
