@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Admin Panel</title>
+<style>
+  body{background:#0b0f17;color:#e6eef6;font-family:Arial;padding:20px}
+  input,button{margin:5px;padding:8px;border-radius:5px;border:none}
+  button{background:linear-gradient(90deg,#00f0ff,#a64dff);color:#04121a;font-weight:bold}
+</style>
+</head>
+<body>
+<h2>Admin Panel</h2>
+<div>
+  <input type="password" id="masterPass" placeholder="Master Password">
+  <input type="number" id="days" placeholder="Valid for (days)" min="1">
+  <button id="btnGen">Generate Key</button>
+</div>
+<div id="output"></div>
+<script>
+document.getElementById("btnGen").onclick=()=>{
+  fetch("/api/generate",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      password:document.getElementById("masterPass").value,
+      days:+document.getElementById("days").value
+    })
+  })
+  .then(r=>r.json())
+  .then(d=>{
+    if(d.key){
+      document.getElementById("output").innerText=
+        "✅ New Key: "+d.key+" (Expires: "+new Date(d.expiresAt).toLocaleString()+")";
+    } else {
+      document.getElementById("output").innerText=d.error||"Error";
+    }
+  });
+}
+</script>
+</body>
+</html>
